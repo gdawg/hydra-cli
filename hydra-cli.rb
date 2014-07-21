@@ -10,4 +10,8 @@ class HydraCli < Formula
     system "make install PREFIX=#{prefix}"
   end
 
+  test do
+    system "#{bin}/hydra -h"
+  end
+
 end

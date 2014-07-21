@@ -1,12 +1,12 @@
 Command line interface to [Hydra](https://github.com/sdegutis/hydra).
 
-Install:
+Install from source:
 
 ~~~bash
 $ make && make install
 ~~~
 
-Or, from Homebrew:
+Install from Homebrew:
 
 ~~~bash
 $ brew install hydra-cli

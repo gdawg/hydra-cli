@@ -3,7 +3,7 @@ Command line interface to [Hydra](https://github.com/sdegutis/hydra).
 Install from source:
 
 ~~~bash
-$ make && make install
+$ make install
 ~~~
 
 Install from Homebrew:

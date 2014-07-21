@@ -6,13 +6,13 @@ Install:
 $ make && make install
 ~~~
 
-Homebrew:
+Or, from Homebrew:
 
 ~~~bash
 $ brew install hydra-cli
 ~~~
 
-Usage:
+Documentation:
 
 ~~~bash
 $ man hydra

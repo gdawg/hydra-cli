@@ -54,6 +54,11 @@ static void hydra_send(CFMessagePortRef port, CFMutableStringRef inputstr) {
     CFRelease(responseString);
 }
 
+void usage(char *argv0) {
+    printf("usage: %s [-i | -s | -c code] [-r] [-n]\n", argv0);
+    exit(0);
+}
+
 int main(int argc, char * argv[]) {
     bool israw = false;
     bool readstdin = false;
@@ -69,10 +74,12 @@ int main(int argc, char * argv[]) {
             case 'c': code = optarg; break;
             case 's': readstdin = true; break;
             case 'h': case '?': default:
-                printf("usage: %s [-i | -s | -c code] [-r] [-n]\n", argv[0]);
-                exit(0);
+                usage(argv[0]);
         }
     }
+
+    if (optind != argc) usage(argv[0]);
+
     argc -= optind;
     argv += optind;
     

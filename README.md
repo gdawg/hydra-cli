@@ -2,13 +2,13 @@ Command line interface to [Hydra](https://github.com/sdegutis/hydra).
 
 [![Build Status](https://travis-ci.org/sdegutis/hydra-cli.svg?branch=master)](https://travis-ci.org/sdegutis/hydra-cli)
 
-##### Installing Manually
+##### Install Manually
 
 ~~~bash
 $ make install
 ~~~
 
-##### Installing from Homebrew
+##### Install from Homebrew
 
 ~~~bash
 $ brew install hydra-cli

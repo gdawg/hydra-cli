@@ -59,7 +59,14 @@ void usage(char *argv0) {
     exit(0);
 }
 
+void sigint_handler(int signo) {
+    printf("%s", COLOR_RESET);
+    exit(0);
+}
+
 int main(int argc, char * argv[]) {
+    signal(SIGINT, sigint_handler);
+    
     bool israw = false;
     bool readstdin = false;
     char* code = NULL;

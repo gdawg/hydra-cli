@@ -2,6 +2,18 @@
 #include <getopt.h>
 #include <editline/readline.h>
 
+static char* COLOR_INITIAL = "";
+static char* COLOR_INPUT = "";
+static char* COLOR_OUTPUT = "";
+static char* COLOR_RESET = "";
+
+static void setupcolors(void) {
+    COLOR_INITIAL = "\e[35m";
+    COLOR_INPUT = "\e[34m";
+    COLOR_OUTPUT = "\e[36m";
+    COLOR_RESET = "\e[0m";
+}
+
 static void hydra_setprefix(CFMutableStringRef inputstr, bool israw) {
     CFStringAppendCString(inputstr, israw ? "r" : "x", kCFStringEncodingUTF8);
 }
@@ -37,7 +49,7 @@ static void hydra_send(CFMessagePortRef port, CFMutableStringRef inputstr) {
     if (!responseCStringPtr)
         CFStringGetCString(responseString, (char *) responseCString, maxSize, kCFStringEncodingUTF8);
     
-    printf("%s\n", responseCStringPtr ? responseCStringPtr : responseCString);
+    printf("%s%s%s\n", COLOR_OUTPUT, responseCStringPtr ? responseCStringPtr : responseCString, COLOR_RESET);
     
     CFRelease(responseString);
 }
@@ -46,16 +58,18 @@ int main(int argc, char * argv[]) {
     bool israw = false;
     bool readstdin = false;
     char* code = NULL;
+    bool usecolors = true;
     
     int ch;
-    while ((ch = getopt(argc, argv, "irc:sh")) != -1) {
+    while ((ch = getopt(argc, argv, "nirc:sh")) != -1) {
         switch (ch) {
+            case 'n': usecolors = false; break;
             case 'i': break;
             case 'r': israw = true; break;
             case 'c': code = optarg; break;
             case 's': readstdin = true; break;
             case 'h': case '?': default:
-                printf("usage: %s [-i | -s | -c code] [-r]\n", argv[0]);
+                printf("usage: %s [-i | -s | -c code] [-r] [-n]\n", argv[0]);
                 exit(0);
         }
     }
@@ -91,12 +105,17 @@ int main(int argc, char * argv[]) {
         hydra_send(port, str);
     }
     else {
-        puts("Hydra interactive prompt.");
+        if (usecolors)
+            setupcolors();
+        
+        printf("%sHydra interactive prompt.%s\n", COLOR_INITIAL, COLOR_RESET);
         
         while (1) {
+            printf("%s", COLOR_INPUT);
             char* input = readline("> ");
             if (!input)
                 return 0;
+            printf("%s", COLOR_RESET);
             add_history(input);
             
             hydra_setprefix(str, israw);

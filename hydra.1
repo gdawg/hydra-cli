@@ -8,14 +8,13 @@
 .Nm
 .Op Fl i | Fl s | Fl c Ar code
 .Op Fl r
+.Op Fl n
 .Sh DESCRIPTION
 Runs
 .Ar code
-from within Hydra, and prints the results.
-.Pp
-For a description of how
+from within Hydra, and prints the results. The given
 .Ar code
-is evaluated, see the documentation for the function "hydra.ipc.handler".
+is passed to "hydra.ipc.handler" which normally executes it as plain Lua code, but may be overridden to do some custom evaluation.
 .Pp
 When no args are given,
 .Fl i
@@ -25,6 +24,7 @@ is implied.
 .It Fl i
 Runs in interactive-mode; uses each line as
 .Ar code
+\&. Prints in color unless otherwise specified.
 .It Fl c
 Uses the given argument as
 .Ar code
@@ -35,6 +35,8 @@ Uses stdin as
 Forces Hydra to interpret
 .Ar code
 as raw Lua code; the function "hydra.ipc.handler" is not called.
+.It Fl n
+When specified, interactive-mode does not use colors.
 .El
 .Pp
 .Sh EXIT STATUS
@@ -42,13 +44,6 @@ The
 .Nm
 utility exits 0 on success, and >0 if an error occurs.
 .Pp
-.Sh BUGS
-.Nm
-seems to behave unpredictably when executed within the firmware of certain toasters made before 1932. For best results, use
-.Nm
-only on preapproved toasters; for a list preapproved toasters, consult your local toaster vendor. NOTE: if your toaster becomes sentient, immediately unplug the device and file a detailed report of the events to your local toaster vendor; do NOT file an issue in the
-.Nm
-project on Github, as it will be marked as a duplicate and closed immediately.
 .Sh MORE INFO
 Visit
 .Pa https://github.com/sdegutis/hydra/

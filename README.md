@@ -1,5 +1,7 @@
 Command line interface to [Hydra](https://github.com/sdegutis/hydra).
 
+[![Build Status](https://travis-ci.org/sdegutis/hydra-cli.svg?branch=master)](https://travis-ci.org/sdegutis/hydra-cli)
+
 ##### Install from source:
 
 ~~~bash

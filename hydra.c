@@ -42,12 +42,12 @@ static void hydra_send(CFMessagePortRef port, CFMutableStringRef inputstr) {
     CFStringRef responseString = CFStringCreateFromExternalRepresentation(NULL, returnedData, kCFStringEncodingUTF8);
     CFRelease(returnedData);
     
-    CFIndex maxSize = CFStringGetMaximumSizeForEncoding(CFStringGetLength(responseString), kCFStringEncodingUTF8);
+    CFIndex maxSize = CFStringGetMaximumSizeForEncoding(CFStringGetLength(responseString), kCFStringEncodingUTF8) + 1;
     const char* responseCStringPtr = CFStringGetCStringPtr(responseString, kCFStringEncodingUTF8);
     char responseCString[maxSize];
     
     if (!responseCStringPtr)
-        CFStringGetCString(responseString, (char *) responseCString, maxSize, kCFStringEncodingUTF8);
+        CFStringGetCString(responseString, responseCString, maxSize, kCFStringEncodingUTF8);
     
     printf("%s%s%s\n", COLOR_OUTPUT, responseCStringPtr ? responseCStringPtr : responseCString, COLOR_RESET);
     

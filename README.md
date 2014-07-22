@@ -17,3 +17,7 @@ Documentation:
 ~~~bash
 $ man hydra
 ~~~
+
+Compatibility:
+
+`hydra-cli` is guaranteed to remain compatible with Hydra 1.x (and will probably remain compatible with all future versions of Hydra).

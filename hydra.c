@@ -120,9 +120,8 @@ int main(int argc, char * argv[]) {
         while (1) {
             printf("%s", COLOR_INPUT);
             char* input = readline("> ");
-            if (!input)
-                return 0;
             printf("%s", COLOR_RESET);
+            if (!input) exit(0);
             add_history(input);
             
             hydra_setprefix(str, israw);
